@@ -94,7 +94,7 @@ export default function Signup({ navigation }) {
 
 const styles = StyleSheet.create({
     box: {
-        padding: 15,
+        padding: 14,
         borderColor: Colors.GREY,
         borderWidth: 1,
         borderRadius: 10,

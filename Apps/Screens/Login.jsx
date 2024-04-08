@@ -72,9 +72,9 @@ export default function Login({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 {/* Forget Password */}
-                <View style={styles.forgetpass}>
+                <TouchableOpacity style={styles.forgetpass}>
                     <Text style={styles.text}>Forget password?</Text>
-                </View>
+                </TouchableOpacity>
                 {/* Submit Button */}
                 <View style={styles.passbutton}>
                     <Buttons text={'Log in'} onPress={handleSubmit}></Buttons>
@@ -90,7 +90,7 @@ export default function Login({ navigation }) {
 
 const styles = StyleSheet.create({
     box: {
-        padding: 15,
+        padding: 14,
         borderColor: Colors.GREY,
         borderWidth: 1,
         borderRadius: 10,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         marginBottom: 18
     },
     forgetpass: {
-        marginBottom: 25
+        marginBottom: 25,
     },
     text: {
         textAlign: 'center',
