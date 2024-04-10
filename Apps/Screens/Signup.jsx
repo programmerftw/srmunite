@@ -34,6 +34,7 @@ export default function Signup({ navigation }) {
         console.log('Username', username);
         console.log('Email:', email);
         console.log('Password:', password);
+        navigation.navigate('otp');
     };
     const gotoLogin = () => {
         navigation.navigate('login');

@@ -24,7 +24,7 @@ export default function Ellipse({ text }) {
 `;
   return (
       <View>
-        <SvgXml xml={svgXml} width={'100%'} />
+        <SvgXml xml={svgXml} width={'100%'}/>
       </View>
   )
 }
