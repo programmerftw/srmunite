@@ -7,11 +7,11 @@ import BottomNavigator from './Apps/Navigator/BottomNavigator';
 export default function App() {
   return (
     // Login and Signup
-    <StackNavigator />
+    // <StackNavigator />
     // <OTP/>
 
     // Other Screens (Home, News, etc)
-    // <BottomNavigator />
+    <BottomNavigator />
 
   );
 }
