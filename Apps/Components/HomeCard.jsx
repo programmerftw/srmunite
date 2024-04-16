@@ -2,8 +2,9 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import CustomFonts from './CustomFonts';
+import Colors from '../Utils/Colors';
 
-export default function HomeCard() {
+export default function HomeCard({height}) {
     const text = "This is a sample text. It might be long enough to exceed the word limit.";
     
     // Loading Fonts
@@ -15,8 +16,8 @@ export default function HomeCard() {
     return (
         <View style={styles.container}>
             <LinearGradient
-                style={styles.gradient}
-                colors={['#007DFF', '#372CE6']}
+                style={[styles.gradient, {height:height}]}
+                colors={[Colors.BLUE, Colors.PBLUE]}
                 start={[0, 0.5]}
                 end={[0.5, 1]}
             >
@@ -30,13 +31,10 @@ export default function HomeCard() {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     gradient: {
         width: '95%',
-        height: 210,
         borderRadius: 24,
     },
     newstext: {
@@ -45,7 +43,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         marginBottom: 25,
         fontSize: 18,
-        fontFamily: "Poppins-Black"
+        fontFamily: "Poppins-Bold"
     },
     tagtext: {
         color: 'white',

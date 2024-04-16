@@ -36,7 +36,7 @@ export default function BottomNavigator() {
                     tabBarIcon: ({ focused }) =>
                         <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
                             <LinearGradient
-                                colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
+                                colors={focused ? [Colors.BLUE, Colors.DBLUE] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
                                 style={styles.gradient}
                                 start={[0, 0]}
                                 end={[1, 1.5]}

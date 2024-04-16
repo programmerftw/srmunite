@@ -12,11 +12,7 @@ export default function App() {
     // <OTP/>
 
     // Other Screens (Home, News, etc)
-    // <BottomNavigator />
-    <View style={{flex:1}}>
-      <HomeCard />
-    </View>
-
+    <BottomNavigator />
   );
 }
 
