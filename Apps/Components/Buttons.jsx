@@ -2,8 +2,13 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Colors from '../Utils/Colors'
 import { LinearGradient } from 'expo-linear-gradient';
+import CustomFonts from './CustomFonts';
 
 export default function Buttons({ onPress, text }) {
+    const fontloaded = CustomFonts()
+    if (!fontloaded){
+        return null;
+    }
     return (
         <View style={{width:'90%'}}>
             <TouchableOpacity onPress={onPress}>
@@ -23,7 +28,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         textAlign: "center",
-        // fontFamily: FontFamily.poppinsSemiBold,
-        fontWeight: "600",
+        fontFamily: "Poppins-Medium",
     },
 });

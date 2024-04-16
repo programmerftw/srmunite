@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import Ellipse from '../Components/Ellipse'
+import SignUpGradient from '../Components/SignUpGradient'
 import Colors from '../Utils/Colors'
 import Buttons from '../Components/Buttons'
 import { MaterialIcons } from '@expo/vector-icons';
+import CustomFonts from '../Components/CustomFonts'
 
 const { width } = Dimensions.get('window');
 
@@ -39,12 +40,20 @@ export default function Signup({ navigation }) {
     const gotoLogin = () => {
         navigation.navigate('login');
     };
+    
+    // Loading Fonts
+    const fontloaded = CustomFonts()
+
+    if (!fontloaded) {
+        return null;
+    }
+
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps='handled'>
                 {/* Header */}
                 <View>
-                    <Ellipse text={"SIGN UP"} />
+                    <SignUpGradient/>
                 </View>
                 {/* Username Input */}
                 <View style={styles.user}>
@@ -101,6 +110,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: '90%',
         color: Colors.GREY,
+        fontFamily: 'Poppins-Regular',
         // ActivityIndicator: 'green'
     },
     user: {
@@ -122,7 +132,7 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         color: Colors.GREY,
-        fontWeight: '500'
+        fontFamily: 'Poppins-Medium'
     },
     eyeButton: {
         position: 'absolute',

@@ -3,6 +3,7 @@ import OTP from './Apps/Screens/OTP';
 import { StatusBar } from 'expo-status-bar';
 import StackNavigator from './Apps/Navigator/StackNavigator';
 import BottomNavigator from './Apps/Navigator/BottomNavigator';
+import HomeCard from './Apps/Components/HomeCard';
 
 export default function App() {
   return (
@@ -11,7 +12,10 @@ export default function App() {
     // <OTP/>
 
     // Other Screens (Home, News, etc)
-    <BottomNavigator />
+    // <BottomNavigator />
+    <View style={{flex:1}}>
+      <HomeCard />
+    </View>
 
   );
 }

@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet,TouchableOpacity, Dimensions, } from 'react-native'
-import React, { useState} from 'react'
-import Ellipse1 from '../Components/Ellipse1'
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, } from 'react-native'
+import React, { useState } from 'react'
+import OtpGradient from '../Components/OtpGradient'
 import Colors from '../Utils/Colors'
 import { OtpInput } from "react-native-otp-entry";
+import CustomFonts from '../Components/CustomFonts';
 
 const { width } = Dimensions.get('window');
 
@@ -18,14 +19,20 @@ export default function OTP({ email }) {
         console.log('otp:', otp);
     };
 
+    // Loading Fonts
+    const fontloaded = CustomFonts()
+
+    if (!fontloaded) {
+        return null;
+    }
     return (
         <View >
             <View>
-                <Ellipse1 text={"OTP VERIFICATION"} />
+                <OtpGradient/>
             </View>
             <View style={styles.box}>
                 <Text style={[styles.text, styles.t1]}>We have sent a verification code to</Text>
-                <Text style={styles.text}>11020210069@stu.srmuniversity.ac.in</Text>
+                <Text style={styles.text}>{email}</Text>
                 <OtpInput
                     numberOfDigits={4}
                     focusColor={Colors.BLUE}
@@ -40,7 +47,7 @@ export default function OTP({ email }) {
                 <View style={styles.footer}>
                     <Text style={styles.text}>Didn't get the OTP ? </Text>
                     <TouchableOpacity >
-                        <Text style={{color:Colors.BLUE}}>Resend Again</Text>
+                        <Text style={{ color: Colors.BLUE ,fontFamily:"Poppins-Medium"}}>Resend Again</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -64,7 +71,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text: {
-        color: Colors.DGREY
+        color: Colors.DGREY,
+        fontFamily:"Poppins-Regular"
     },
     t1: {
         marginTop: width * 0.15,
