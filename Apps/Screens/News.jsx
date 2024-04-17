@@ -11,7 +11,7 @@ export default function News() {
   ];
 
   return (
-    <ScrollView style={styles.newsContainer}>
+    <ScrollView>
       <Header headText={'News'} fontFamily={'Poppins-Medium'} fontSize={26} />
       <View style={styles.newsContainer}>
         {data.map(item => (
