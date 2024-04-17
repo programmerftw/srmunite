@@ -1,12 +1,14 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import CustomFonts from './CustomFonts';
 import Colors from '../Utils/Colors';
 
-export default function HomeCard({height}) {
-    const text = "This is a sample text. It might be long enough to exceed the word limit.";
-    
+const screenWidth = Dimensions.get('window').width;
+const cardWidth = screenWidth * 0.95;
+
+export default function NewsCard({ height, news, tag ,marginBottom}) {
+
     // Loading Fonts
     const fontloaded = CustomFonts();
     if (!fontloaded) {
@@ -14,16 +16,16 @@ export default function HomeCard({height}) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,{marginBottom:marginBottom}]}>
             <LinearGradient
-                style={[styles.gradient, {height:height}]}
+                style={[styles.gradient, { height: height }]}
                 colors={[Colors.BLUE, Colors.PBLUE]}
                 start={[0, 0.5]}
                 end={[0.5, 1]}
             >
-                <Text style={styles.tagtext}>Sports</Text>
+                <Text style={styles.tagtext}>{tag}</Text>
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                    <Text style={styles.newstext} numberOfLines={3} ellipsizeMode="tail">{text}</Text>
+                    <Text style={styles.newstext} numberOfLines={3} ellipsizeMode="tail">{news}</Text>
                 </View>
             </LinearGradient>
         </View>
@@ -31,10 +33,11 @@ export default function HomeCard({height}) {
 }
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center'
+        alignItems: 'center',
+        marginHorizontal: 10
     },
     gradient: {
-        width: '95%',
+        width: cardWidth,
         borderRadius: 24,
     },
     newstext: {

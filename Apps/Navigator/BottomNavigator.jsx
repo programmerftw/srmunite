@@ -12,10 +12,10 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 const Tab = createBottomTabNavigator();
 var iconSize = 22;
-const iconContainerSize = 56; 
+const iconContainerSize = 56;
 
 export default function BottomNavigator() {
-    
+
     return (
         <NavigationContainer>
             <Tab.Navigator screenOptions={screenOptions} initialRouteName='Home'>
@@ -84,7 +84,7 @@ const screenOptions = {
         bottom: 20,
         right: 10,
         left: 10,
-        elevation: 0,
+        elevation: 2,
         height: 80,
         background: "#D9D9D9",
         borderRadius: 50,

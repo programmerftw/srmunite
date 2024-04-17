@@ -6,7 +6,7 @@ export default function LostAndFound() {
   return (
     <View>
       <Header headText={'LostAndFound'} fontFamily={'Poppins-Medium'} fontSize={26}/>
-      <Text>LostAndFound</Text>
+      
     </View>
   )
 }

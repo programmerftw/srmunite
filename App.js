@@ -3,7 +3,6 @@ import OTP from './Apps/Screens/OTP';
 import { StatusBar } from 'expo-status-bar';
 import StackNavigator from './Apps/Navigator/StackNavigator';
 import BottomNavigator from './Apps/Navigator/BottomNavigator';
-import HomeCard from './Apps/Components/HomeCard';
 
 export default function App() {
   return (

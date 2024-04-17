@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet,TouchableOpacity } from 'react-native'
 import React from 'react'
 import Colors from '../Utils/Colors'
 import CustomFonts from './CustomFonts'
@@ -9,10 +9,10 @@ export default function ProfileButton({ initials }) {
         return null;
     }
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}>
             {/* <Text style={styles.text}>{initials}</Text> */}
             <Text style={styles.text}>R</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -22,11 +22,12 @@ const styles = StyleSheet.create({
         width: 40,
         backgroundColor: Colors.LGREY,
         borderRadius: 50,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     text: {
+        marginTop:3,
         textAlign: 'center',
         fontFamily: 'Poppins-Medium',
-        fontSize: 16
+        fontSize: 18
     }
 })
