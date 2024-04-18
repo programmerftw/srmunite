@@ -13,5 +13,6 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         height: 160,
         width: 160,
+        borderRadius:100
     }
 })

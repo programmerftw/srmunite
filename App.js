@@ -5,11 +5,11 @@ import StackNavigator from './Apps/Navigator/StackNavigator';
 import BottomNavigator from './Apps/Navigator/BottomNavigator';
 import Profile from './Apps/Screens/Profile'
 import NewsExtended from './Apps/Screens/NewsExtended'
+
 export default function App() {
   return (
     // Login and Signup
     // <StackNavigator />
-    // <OTP/>
 
     // Other Screens (Home, News, etc)
     <BottomNavigator />

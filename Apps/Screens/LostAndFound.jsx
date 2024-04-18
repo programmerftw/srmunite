@@ -6,7 +6,7 @@ import ItemsCard from '../Components/ItemsCard'
 export default function LostAndFound() {
   return (
     <ScrollView>
-      <Header headText={'LostAndFound'} fontFamily={'Poppins-Medium'} fontSize={26} />
+      <Header headText={'Lost And Found'} fontFamily={'Poppins-SemiBold'} fontSize={26} routeName={'LostAndFound'}/>
       <View style={styles.itemContainer}>
         <ItemsCard />
         <ItemsCard />

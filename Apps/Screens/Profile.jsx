@@ -4,9 +4,11 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import ProfilePhoto from '../Components/ProfilePhoto';
 import CustomFonts from '../Components/CustomFonts';
 import Colors from '../Utils/Colors';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Profile({ name, email }) {
 
+    const navigation = useNavigation();
     const fontloaded = CustomFonts()
     const [darkModeEnabled, setDarkModeEnabled] = useState(false);
 
@@ -15,7 +17,7 @@ export default function Profile({ name, email }) {
     };
 
     const goBack = () => {
-        navigation.navigate(previousScreen);
+        navigation.goBack()
     };
 
     if (!fontloaded) {

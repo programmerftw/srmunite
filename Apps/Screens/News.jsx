@@ -12,7 +12,7 @@ export default function News() {
 
   return (
     <ScrollView>
-      <Header headText={'News'} fontFamily={'Poppins-Medium'} fontSize={26} />
+      <Header headText={'News'} fontFamily={'Poppins-SemiBold'} fontSize={26} routeName={'News'}/>
       <View style={styles.newsContainer}>
         {data.map(item => (
           <NewsCard key={item.id} height={245} news={item.news} tag={item.tag} marginBottom={20} />

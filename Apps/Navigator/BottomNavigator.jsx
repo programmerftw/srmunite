@@ -1,26 +1,47 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Home from '../Screens/Home';
-import LostandFound from '../Screens/LostAndFound';
 import News from '../Screens/News';
+import LostAndFound from '../Screens/LostAndFound';
+import NewsExtended from '../Screens/NewsExtended';
 import Settings from '../Screens/Settings';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import Colors from '../Utils/Colors';
+import Profile from '../Screens/Profile';
 import { Ionicons, Entypo } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
+
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 var iconSize = 22;
 const iconContainerSize = 56;
 
+const HomeStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="home" component={Home} />
+            <Stack.Screen name="profile" component={Profile} />
+        </Stack.Navigator>
+    );
+};
+const Newstack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="news" component={News} />
+            <Stack.Screen name="newsextended" component={NewsExtended} />
+        </Stack.Navigator>
+    );
+};
 export default function BottomNavigator() {
 
     return (
         <NavigationContainer>
             {/* Home Screen */}
-            <Tab.Navigator screenOptions={screenOptions} initialRouteName='Home'>
-                <Tab.Screen name="home" component={Home} options={{
+            <Tab.Navigator screenOptions={screenOptions} initialRouteName='homestack'>
+                <Tab.Screen name="homestack" component={HomeStack} options={{
                     tabBarIcon: ({ focused }) =>
                         <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
                             <LinearGradient
@@ -34,7 +55,7 @@ export default function BottomNavigator() {
                         </View>
                 }} />
                 {/* Lost and Found Screen */}
-                <Tab.Screen name="profile" component={LostandFound} options={{
+                <Tab.Screen name="lostandfound" component={LostAndFound} options={{
                     tabBarIcon: ({ focused }) =>
                         <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
                             <LinearGradient
