@@ -3,7 +3,8 @@ import OTP from './Apps/Screens/OTP';
 import { StatusBar } from 'expo-status-bar';
 import StackNavigator from './Apps/Navigator/StackNavigator';
 import BottomNavigator from './Apps/Navigator/BottomNavigator';
-
+import Profile from './Apps/Screens/Profile'
+import NewsExtended from './Apps/Screens/NewsExtended'
 export default function App() {
   return (
     // Login and Signup
@@ -12,6 +13,8 @@ export default function App() {
 
     // Other Screens (Home, News, etc)
     <BottomNavigator />
+    // <Profile/>
+    // <NewsExtended/>
   );
 }
 

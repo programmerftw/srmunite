@@ -1,33 +1,21 @@
-import { View, Text, StyleSheet, Image} from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import Colors from '../Utils/Colors'
 import CustomFonts from './CustomFonts'
 
-export default function ItemsCard({ path, location }) {
-
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const month = currentDate.getMonth() + 1; // Months are zero-indexed, so add 1
-  const year = currentDate.getFullYear();
-
-  // Format day, month, and year to have leading zeros if needed
-  const formattedDay = day < 10 ? '0' + day : day;
-  const formattedMonth = month < 10 ? '0' + month : month;
-
-  // Combine day, month, and year in the desired format
-  const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
+export default function ItemsCard({ path, location, date }) {
 
   const fontloaded = CustomFonts()
 
   if (!fontloaded) {
     return null;
   }
-  const testPath = '../../assets/images/LostItem1.jpg'
+
   return (
     <View style={styles.body}>
       <View style={styles.container}>
-        <Image source={require('../../assets/images/LostItem1.jpg')} style={styles.image} />
-        <Text style={styles.text}>DATE : {formattedDate}</Text>
+        <Image source={require('../../assets/images/LostandFoundItems/LostItem1.jpg')} style={styles.image} />
+        <Text style={styles.text}>DATE : 18/04/24</Text>
         <Text style={styles.text} numberOfLines={null}>LOCATION : 5TH FLOOR, LAB-4</Text>
       </View>
     </View>
@@ -50,12 +38,13 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 210,
+    height: 220,
     borderRadius: 13,
     resizeMode: 'stretch',
-    marginBottom: 15
+    marginBottom: 18
   },
   text: {
+    fontSize:12,
     marginLeft: 10,
     // textAlign: 'center',
     fontFamily: "Poppins-SemiBold",

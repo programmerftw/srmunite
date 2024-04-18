@@ -18,6 +18,7 @@ export default function BottomNavigator() {
 
     return (
         <NavigationContainer>
+            {/* Home Screen */}
             <Tab.Navigator screenOptions={screenOptions} initialRouteName='Home'>
                 <Tab.Screen name="home" component={Home} options={{
                     tabBarIcon: ({ focused }) =>
@@ -32,6 +33,7 @@ export default function BottomNavigator() {
                             </LinearGradient>
                         </View>
                 }} />
+                {/* Lost and Found Screen */}
                 <Tab.Screen name="profile" component={LostandFound} options={{
                     tabBarIcon: ({ focused }) =>
                         <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
@@ -45,6 +47,7 @@ export default function BottomNavigator() {
                             </LinearGradient>
                         </View>
                 }} />
+                {/* News Screen */}
                 <Tab.Screen name="news" component={News} options={{
                     tabBarIcon: ({ focused }) =>
                         <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
@@ -58,7 +61,8 @@ export default function BottomNavigator() {
                             </LinearGradient>
                         </View>
                 }} />
-                <Tab.Screen name="settings" component={Settings} options={{
+                {/* Settings Screen */}
+                {/* <Tab.Screen name="settings" component={Settings} options={{
                     tabBarIcon: ({ focused }) =>
                         <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
                             <LinearGradient
@@ -70,7 +74,7 @@ export default function BottomNavigator() {
                                 <Ionicons name="settings" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
                             </LinearGradient>
                         </View>
-                }} />
+                }} /> */}
             </Tab.Navigator>
         </NavigationContainer>
     )

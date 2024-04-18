@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: 25,
         marginLeft: 30,
-        fontFamily: 'Poppins-SemiBold'
+        fontFamily: 'Poppins-SemiBold',
+        textTransform:'uppercase'
     }
 })

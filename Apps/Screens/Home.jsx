@@ -19,7 +19,6 @@ export default function Home() {
   const renderItem = ({ item, index }) => (
     <View>
       <NewsCard height={200} news={item.news} tag={item.tag} />
-      {index !== activeIndex && <View style={styles.dot} />}
     </View>
   );
 
@@ -78,7 +77,8 @@ const styles = StyleSheet.create({
     height: 6,
     borderRadius: 4,
     marginHorizontal: 5,
-    backgroundColor: Colors.LGREY
+    marginTop:5,
+    backgroundColor: Colors.LGREY,
   },
   activeDot: {
     width: 14,
