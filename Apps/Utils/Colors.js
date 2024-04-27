@@ -5,6 +5,10 @@ export default {
     GREY: "#979595",
     LGREY: "#D9D9D9",
     DGREY: "#6C6A6A",
-    ACTIVE_TAB_COLOR :'#FFFFFF',
-    INACTIVE_TAB_COLOR : '#000000'
+    ACTIVE_TAB_COLOR: '#FFFFFF',
+    INACTIVE_TAB_COLOR: '#000000',
+    //Dark Mode Colors
+    BACKGROUND: "#2A2C38",
+    DMBLUE: "#0F4B8A",
+    DMDBLUE: "#092D53"
 }

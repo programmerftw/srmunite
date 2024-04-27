@@ -30,18 +30,24 @@ export default function Profile({ name, email }) {
                 <Ionicons name="chevron-back-outline" size={30} color="black" />
             </TouchableOpacity>
             <ProfilePhoto />
+            {/* Name */}
             <Text style={styles.name}>Raushan Bhanu</Text>
+            {/* Email */}
             <Text style={styles.email}>11020210069@stu.srmuniversity.ac.in</Text>
             {/* Horizontal Lines */}
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
             </View>
-            <Text style={styles.text}>Change Password</Text>
+            {/* To Change password */}
+            <TouchableOpacity activeOpacity={0.4}>
+                <Text style={styles.text}>Change Password</Text>
+            </TouchableOpacity>
             {/* Horizontal Lines */}
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
             </View>
             <View style={styles.darkModeContainer} >
+                {/* To enable darkmode */}
                 <Text style={styles.text}>Dark Mode</Text>
                 <TouchableOpacity onPress={toggleDarkMode}>
                     <FontAwesome name={darkModeEnabled ? "toggle-on" : "toggle-off"} size={24} color="black" style={styles.iconStyle} />

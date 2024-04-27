@@ -21,69 +21,51 @@ const iconContainerSize = 56;
 
 const HomeStack = () => {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="home" component={Home} />
-            <Stack.Screen name="profile" component={Profile} />
-        </Stack.Navigator>
-    );
-};
-const Newstack = () => {
-    return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="news" component={News} />
-            <Stack.Screen name="newsextended" component={NewsExtended} />
-        </Stack.Navigator>
-    );
-};
-export default function BottomNavigator() {
-
-    return (
-        <NavigationContainer>
-            {/* Home Screen */}
-            <Tab.Navigator screenOptions={screenOptions} initialRouteName='homestack'>
-                <Tab.Screen name="homestack" component={HomeStack} options={{
-                    tabBarIcon: ({ focused }) =>
-                        <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
-                            <LinearGradient
-                                colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
-                                style={styles.gradient}
-                                start={[0, 0]}
-                                end={[1, 1.5]}
-                            >
-                                <Ionicons name="home" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
-                            </LinearGradient>
-                        </View>
-                }} />
-                {/* Lost and Found Screen */}
-                <Tab.Screen name="lostandfound" component={LostAndFound} options={{
-                    tabBarIcon: ({ focused }) =>
-                        <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
-                            <LinearGradient
-                                colors={focused ? [Colors.BLUE, Colors.DBLUE] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
-                                style={styles.gradient}
-                                start={[0, 0]}
-                                end={[1, 1.5]}
-                            >
-                                <Ionicons name="newspaper" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
-                            </LinearGradient>
-                        </View>
-                }} />
-                {/* News Screen */}
-                <Tab.Screen name="news" component={News} options={{
-                    tabBarIcon: ({ focused }) =>
-                        <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
-                            <LinearGradient
-                                colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
-                                style={styles.gradient}
-                                start={[0, 0]}
-                                end={[1, 1.5]}
-                            >
-                                <Entypo name="briefcase" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
-                            </LinearGradient>
-                        </View>
-                }} />
-                {/* Settings Screen */}
-                {/* <Tab.Screen name="settings" component={Settings} options={{
+        <Tab.Navigator screenOptions={screenOptions} initialRouteName='homestack'>
+            {/* HomeScreen */}
+            <Tab.Screen name="home" component={Home} options={{
+                tabBarIcon: ({ focused }) =>
+                    <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
+                        <LinearGradient
+                            colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
+                            style={styles.gradient}
+                            start={[0, 0]}
+                            end={[1, 1.5]}
+                        >
+                            <Ionicons name="home" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
+                        </LinearGradient>
+                    </View>
+            }} />
+            {/* Lost and Found Screen */}
+            <Tab.Screen name="lostandfound" component={LostAndFound} options={{
+                tabBarIcon: ({ focused }) =>
+                    <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
+                        <LinearGradient
+                            colors={focused ? [Colors.BLUE, Colors.DBLUE] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
+                            style={styles.gradient}
+                            start={[0, 0]}
+                            end={[1, 1.5]}
+                        >
+                            <Ionicons name="newspaper" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
+                        </LinearGradient>
+                    </View>
+            }} />
+            {/* News Screen */}
+            <Tab.Screen name="news" component={News} options={{
+                tabBarIcon: ({ focused }) =>
+                    <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
+                        <LinearGradient
+                            colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
+                            style={styles.gradient}
+                            start={[0, 0]}
+                            end={[1, 1.5]}
+                        >
+                            <Entypo name="briefcase" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
+                        </LinearGradient>
+                    </View>
+            }} />
+            {/* Settings Screen */}
+            {/* <Tab.Screen name="settings" component={Settings} options={{
                     tabBarIcon: ({ focused }) =>
                         <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
                             <LinearGradient
@@ -96,8 +78,21 @@ export default function BottomNavigator() {
                             </LinearGradient>
                         </View>
                 }} /> */}
-            </Tab.Navigator>
+        </Tab.Navigator>
+
+    );
+};
+
+export default function BottomNavigator() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="homestack" component={HomeStack} />
+                <Stack.Screen name="profile" component={Profile} />
+                <Stack.Screen name="newsextended" component={NewsExtended} />
+            </Stack.Navigator>
         </NavigationContainer>
+
     )
 }
 

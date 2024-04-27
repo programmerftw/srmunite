@@ -10,7 +10,9 @@ export default function ProfileButton({ initials }) {
     const handleProfilePress = () => {
         navigation.navigate('profile'); // Navigate to profile screen
     };
+
     const fontloaded = CustomFonts();
+
     if (!fontloaded) {
         return null;
     }

@@ -5,6 +5,7 @@ import Header from '../Components/Header'
 export default function Settings() {
   return (
     <View>
+      {/* Header */}
       <Header headText={'Settings'} fontFamily={'Poppins-Medium'} fontSize={26}/>
     </View>
   )

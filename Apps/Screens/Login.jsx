@@ -37,6 +37,7 @@ export default function Login({ navigation }) {
         setPassword('');
     };
 
+    // Goto Signup
     const gotoSignup = () => {
         navigation.navigate('signup');
         clearFields();
@@ -48,6 +49,7 @@ export default function Login({ navigation }) {
     if (!fontloaded) {
         return null;
     }
+
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps='handled'>
@@ -88,6 +90,7 @@ export default function Login({ navigation }) {
                 <View style={styles.passbutton}>
                     <Buttons text={'Log in'} onPress={handleSubmit}></Buttons>
                 </View>
+                {/* SignUp text */}
                 <TouchableOpacity onPress={gotoSignup}>
                     <Text style={styles.text}>Sign up</Text>
                 </TouchableOpacity>

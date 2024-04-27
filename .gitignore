@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+# backend-folder
+srmunite-backend
+
 # Expo
 .expo/
 dist/

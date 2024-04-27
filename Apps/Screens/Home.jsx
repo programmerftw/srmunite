@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native'
+import { View, StyleSheet, FlatList, Dimensions } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 import NewsCard from '../Components/NewsCard'
 import Header from '../Components/Header'
@@ -10,6 +10,7 @@ export default function Home() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [NewsData, setNewsData] = useState([]);
+  // rendering newscard
   const renderItem = ({ item, index }) => (
     <View>
       <NewsCard height={200} news={item.news} tag={item.tags} />
@@ -45,8 +46,12 @@ export default function Home() {
 
   return (
     <View>
-      <Header headText={'Unite'} fontFamily={'Rochester'} fontSize={28} />
+      <View style={{ marginTop: 2.571 }}>
+        {/* Header */}
+        <Header headText={'Unite'} fontFamily={'Rochester'} fontSize={28} />
+      </View>
       <View style={styles.container}>
+        {/* Moving card */}
         <FlatList
           ref={flatListRef}
           data={NewsData}
@@ -60,6 +65,7 @@ export default function Home() {
             setActiveIndex(newIndex);
           }}
         />
+        {/* Pagination */}
         <View style={styles.pagination}>
           {NewsData.map((_item, index) => (
             <View
