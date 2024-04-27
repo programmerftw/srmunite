@@ -8,32 +8,40 @@ const screenWidth = Dimensions.get('window').width;
 
 export default function Home() {
 
-  const data = [
-    { id: '1', news: "This is a sample text. It might be long enough to exceed the word limit.", tag: "Sports" },
-    { id: '2', news: "This is another sample text. It might be long enough to exceed the word limit.", tag: "News" },
-    { id: '3', news: "This is yet another sample text. It might be long enough to exceed the word limit.", tag: "Technology" },
-  ];
-
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const [NewsData, setNewsData] = useState([]);
   const renderItem = ({ item, index }) => (
     <View>
-      <NewsCard height={200} news={item.news} tag={item.tag} />
+      <NewsCard height={200} news={item.news} tag={item.tags} />
     </View>
   );
 
   const flatListRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex(prevIndex => (prevIndex + 1) % data.length);
-      flatListRef.current.scrollToIndex({
-        animated: true,
-        index: (activeIndex + 1) % data.length,
+    fetch('http://192.168.1.111:3000/api/news')
+      .then(response => response.json())
+      .then((data) => {
+        // Handle the data received from the server
+        // console.log(data); // or set state, etc.
+        setNewsData(data)
+        console.log(NewsData)
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
       });
+
+    const interval = setInterval(() => {
+      if (NewsData.length > 0) {
+        setActiveIndex(prevIndex => (prevIndex + 1) % NewsData.length);
+        flatListRef.current.scrollToIndex({
+          animated: true,
+          index: (activeIndex + 1) % NewsData.length,
+        });
+      }
     }, 4000);
     return () => clearInterval(interval);
-  }, [activeIndex, data.length]);
+  }, [activeIndex, NewsData.length]);
 
   return (
     <View>
@@ -41,9 +49,9 @@ export default function Home() {
       <View style={styles.container}>
         <FlatList
           ref={flatListRef}
-          data={data}
+          data={NewsData}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item._id}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
@@ -53,7 +61,7 @@ export default function Home() {
           }}
         />
         <View style={styles.pagination}>
-          {data.map((item, index) => (
+          {NewsData.map((_item, index) => (
             <View
               key={index}
               style={[styles.dot, index === activeIndex && styles.activeDot]}
@@ -77,7 +85,7 @@ const styles = StyleSheet.create({
     height: 6,
     borderRadius: 4,
     marginHorizontal: 5,
-    marginTop:5,
+    marginTop: 5,
     backgroundColor: Colors.LGREY,
   },
   activeDot: {

@@ -1,21 +1,33 @@
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
-import React from 'react'
 import NewsCard from '../Components/NewsCard'
 import Header from '../Components/Header'
+import React, { useState, useEffect } from 'react';
 
 export default function News() {
-  const data = [
-    { id: '1', news: "This is a sample text. It might be long enough to exceed the word limit.", tag: "Sports" },
-    { id: '2', news: "This is another sample text. It might be long enough to exceed the word limit.", tag: "News" },
-    { id: '3', news: "This is yet another sample text. It might be long enough to exceed the word limit.", tag: "Technology" },
-  ];
+
+  const [newsData, setNewsData] = useState([]);
+  useEffect(() => {
+    // Function to fetch data
+
+    fetch('http://192.168.1.111:3000/api/news')
+      .then(response => response.json())
+      .then(data => {
+        // Handle the data received from the server
+        console.log(data); // or set state, etc.
+        setNewsData(data)
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+
+  }, []); // Empty dependency array ensures the effect runs only once
 
   return (
     <ScrollView>
-      <Header headText={'News'} fontFamily={'Poppins-SemiBold'} fontSize={26} routeName={'News'}/>
+      <Header headText={'News'} fontFamily={'Poppins-SemiBold'} fontSize={26} routeName={'News'} />
       <View style={styles.newsContainer}>
-        {data.map(item => (
-          <NewsCard key={item.id} height={245} news={item.news} tag={item.tag} marginBottom={20} />
+        {newsData.map(item => (
+          <NewsCard key={item._id} height={245} news={item.news} tag={item.tags} marginBottom={20} />
         ))}
       </View>
     </ScrollView>

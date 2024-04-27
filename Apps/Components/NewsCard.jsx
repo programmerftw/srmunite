@@ -3,11 +3,10 @@ import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import CustomFonts from './CustomFonts';
 import Colors from '../Utils/Colors';
-
 const screenWidth = Dimensions.get('window').width;
 const cardWidth = screenWidth * 0.95;
 
-export default function NewsCard({ height, news, tag ,marginBottom}) {
+export default function NewsCard({ height, news, tag, marginBottom }) {
 
     // Loading Fonts
     const fontloaded = CustomFonts();
@@ -16,7 +15,7 @@ export default function NewsCard({ height, news, tag ,marginBottom}) {
     }
 
     return (
-        <View style={[styles.container,{marginBottom:marginBottom}]}>
+        <View style={[styles.container, { marginBottom: marginBottom }]}>
             <LinearGradient
                 style={[styles.gradient, { height: height }]}
                 colors={[Colors.BLUE, Colors.PBLUE]}
@@ -53,6 +52,6 @@ const styles = StyleSheet.create({
         marginTop: 25,
         marginLeft: 30,
         fontFamily: 'Poppins-SemiBold',
-        textTransform:'uppercase'
+        textTransform: 'uppercase'
     }
 })
