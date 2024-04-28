@@ -1,15 +1,23 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Dimensions, KeyboardAvoidingView, ScrollView, useColorScheme } from 'react-native'
 import React, { useState } from 'react'
 import LoginGradient from '../Components/LoginGradient'
 import Colors from '../Utils/Colors'
 import Buttons from '../Components/Buttons'
 import { MaterialIcons } from '@expo/vector-icons';
 import CustomFonts from '../Components/CustomFonts'
-
+import { useNavigation } from '@react-navigation/native'
 
 const { width } = Dimensions.get('window');
 
-export default function Login({ navigation }) {
+const base_url = "https://two-factor-auth-5geo.onrender.com";
+
+export default function Login() {
+
+    const navigation = useNavigation();
+
+    const colorScheme = useColorScheme();
+    const themeContainerStyle = colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -30,6 +38,23 @@ export default function Login({ navigation }) {
         // Handle form submission here
         console.log('Email:', email);
         console.log('Password:', password);
+
+        fetch(base_url + "/api/user/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json" // Fixed typo in Content-Type header
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data)
+                navigation.navigate('customnav');
+            })
+            .catch(error => console.error('Error:', error)); // Add error handling
     };
     // Function to clear text input fields
     const clearFields = () => {
@@ -37,7 +62,6 @@ export default function Login({ navigation }) {
         setPassword('');
     };
 
-    // Goto Signup
     const gotoSignup = () => {
         navigation.navigate('signup');
         clearFields();
@@ -49,10 +73,9 @@ export default function Login({ navigation }) {
     if (!fontloaded) {
         return null;
     }
-
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps='handled'>
+            <ScrollView style={[themeContainerStyle]} contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps='handled'>
                 {/* Header */}
                 <View>
                     <LoginGradient />
@@ -61,6 +84,7 @@ export default function Login({ navigation }) {
                 <View style={styles.email}>
                     <TextInput style={styles.box}
                         placeholder='E-mail'
+                        placeholderTextColor={Colors.GREY}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         value={email}
@@ -72,6 +96,7 @@ export default function Login({ navigation }) {
                     <TextInput
                         style={styles.box}
                         placeholder='Password'
+                        placeholderTextColor={Colors.GREY}
                         secureTextEntry={!showPassword}
                         autoCapitalize="none"
                         value={password}
@@ -90,7 +115,6 @@ export default function Login({ navigation }) {
                 <View style={styles.passbutton}>
                     <Buttons text={'Log in'} onPress={handleSubmit}></Buttons>
                 </View>
-                {/* SignUp text */}
                 <TouchableOpacity onPress={gotoSignup}>
                     <Text style={styles.text}>Sign up</Text>
                 </TouchableOpacity>
@@ -101,6 +125,9 @@ export default function Login({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+    darkContainer: {
+        backgroundColor: Colors.BACKGROUND
+    },
     box: {
         padding: 14,
         borderColor: Colors.GREY,

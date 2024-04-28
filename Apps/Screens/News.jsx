@@ -1,9 +1,14 @@
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, ScrollView, StyleSheet, useColorScheme } from 'react-native'
 import NewsCard from '../Components/NewsCard'
 import Header from '../Components/Header'
 import React, { useState, useEffect } from 'react';
+import Colors from '../Utils/Colors';
 
 export default function News() {
+
+  const colorScheme = useColorScheme();
+  const themeContainerStyle =
+    colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
 
   const [newsData, setNewsData] = useState([]);
   useEffect(() => {
@@ -23,9 +28,9 @@ export default function News() {
   }, []); // Empty dependency array ensures the effect runs only once
 
   return (
-    <ScrollView>
+    <ScrollView style={[themeContainerStyle]}>
       {/* Header */}
-      <Header headText={'News'} fontFamily={'Poppins-SemiBold'} fontSize={26} routeName={'News'} />
+      <Header headText={'News'} fontFamily={'Poppins-SemiBold'} fontSize={26} />
       {/* News Container */}
       <View style={styles.newsContainer}>
         {newsData.map(item => (
@@ -38,6 +43,9 @@ export default function News() {
 }
 
 const styles = StyleSheet.create({
+  darkContainer: {
+    backgroundColor: Colors.BACKGROUND
+  },
   newsContainer: {
     paddingBottom: 100,
   }

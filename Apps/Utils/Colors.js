@@ -10,5 +10,6 @@ export default {
     //Dark Mode Colors
     BACKGROUND: "#2A2C38",
     DMBLUE: "#0F4B8A",
-    DMDBLUE: "#092D53"
+    DMDBLUE: "#092D53",
+    DMNAV: "#434343"
 }

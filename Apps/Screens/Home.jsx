@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList, Dimensions } from 'react-native'
+import { View, StyleSheet, FlatList, Dimensions, useColorScheme } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 import NewsCard from '../Components/NewsCard'
 import Header from '../Components/Header'
@@ -7,6 +7,11 @@ import Colors from '../Utils/Colors'
 const screenWidth = Dimensions.get('window').width;
 
 export default function Home() {
+
+  const colorScheme = useColorScheme();
+  const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+  const themeContainerStyle =
+    colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [NewsData, setNewsData] = useState([]);
@@ -45,7 +50,7 @@ export default function Home() {
   }, [activeIndex, NewsData.length]);
 
   return (
-    <View>
+    <View style={[themeContainerStyle]}>
       <View style={{ marginTop: 2.571 }}>
         {/* Header */}
         <Header headText={'Unite'} fontFamily={'Rochester'} fontSize={28} />
@@ -80,6 +85,13 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
+  lightContainer: {
+    height: '100%'
+  },
+  darkContainer: {
+    backgroundColor: Colors.BACKGROUND,
+    height: '100%'
+  },
   pagination: {
     flexDirection: 'row',
     justifyContent: 'center',

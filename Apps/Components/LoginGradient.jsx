@@ -1,6 +1,7 @@
 import { View} from 'react-native'
 import React from 'react'
 import { SvgXml} from 'react-native-svg';
+import Colors from '../Utils/Colors';
 
 export default function LoginGradient() {
   const svgXml = `

@@ -1,12 +1,18 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import ProfilePhoto from '../Components/ProfilePhoto';
 import CustomFonts from '../Components/CustomFonts';
 import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/native';
+import Buttons from '../Components/Buttons';
 
 export default function Profile({ name, email }) {
+
+    const colorScheme = useColorScheme();
+    const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+    const themeContainerStyle = colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
+    const iconColor = colorScheme === 'light' ? 'black' : 'white';
 
     const navigation = useNavigation();
     const fontloaded = CustomFonts()
@@ -25,13 +31,13 @@ export default function Profile({ name, email }) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[themeContainerStyle]}>
             <TouchableOpacity style={styles.icon} onPress={goBack}>
-                <Ionicons name="chevron-back-outline" size={30} color="black" />
+                <Ionicons name="chevron-back-outline" size={28} color={iconColor} />
             </TouchableOpacity>
             <ProfilePhoto />
             {/* Name */}
-            <Text style={styles.name}>Raushan Bhanu</Text>
+            <Text style={[styles.name, themeTextStyle]}>Raushan Bhanu</Text>
             {/* Email */}
             <Text style={styles.email}>11020210069@stu.srmuniversity.ac.in</Text>
             {/* Horizontal Lines */}
@@ -40,7 +46,7 @@ export default function Profile({ name, email }) {
             </View>
             {/* To Change password */}
             <TouchableOpacity activeOpacity={0.4}>
-                <Text style={styles.text}>Change Password</Text>
+                <Text style={[styles.text, themeTextStyle]}>Change Password</Text>
             </TouchableOpacity>
             {/* Horizontal Lines */}
             <View style={styles.lineContainer}>
@@ -48,26 +54,35 @@ export default function Profile({ name, email }) {
             </View>
             <View style={styles.darkModeContainer} >
                 {/* To enable darkmode */}
-                <Text style={styles.text}>Dark Mode</Text>
+                <Text style={[styles.text, themeTextStyle]}>Dark Mode</Text>
                 <TouchableOpacity onPress={toggleDarkMode}>
-                    <FontAwesome name={darkModeEnabled ? "toggle-on" : "toggle-off"} size={24} color="black" style={styles.iconStyle} />
+                    <FontAwesome name={darkModeEnabled ? "toggle-on" : "toggle-off"} size={24} color={iconColor} style={styles.iconStyle} />
                 </TouchableOpacity>
             </View>
             {/* Horizontal Lines */}
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
             </View>
+            <View style={styles.button}>
+                <Buttons onPress={() => { console.log('logout') }} text={'Log out'} />
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 35
+    lightContainer: {
+        paddingTop: 35,
+    },
+    darkContainer: {
+        paddingTop: 35,
+        backgroundColor: Colors.BACKGROUND,
+        height: '100%'
     },
     icon: {
         width: '20%',
-        padding: 8,
+        paddingVertical: 18,
+        paddingHorizontal: 6,
     },
     name: {
         fontFamily: 'Poppins-SemiBold',
@@ -94,6 +109,9 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         marginLeft: 25,
     },
+    darkThemeText: {
+        color: 'white'
+    },
     darkModeContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -102,4 +120,11 @@ const styles = StyleSheet.create({
     iconStyle: {
         marginRight: 25,
     },
+    button: {
+        position: 'absolute',
+        bottom: 20, // Adjust this value as needed to fit your layout
+        left: 0,
+        right: 0,
+        alignItems: 'center',
+    }
 })

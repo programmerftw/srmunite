@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useColorScheme } from 'react-native';
 import Home from '../Screens/Home';
 import News from '../Screens/News';
 import LostAndFound from '../Screens/LostAndFound';
@@ -13,19 +13,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 var iconSize = 22;
 const iconContainerSize = 56;
 
-const HomeStack = () => {
+const MainStack = () => {
     return (
         <Tab.Navigator screenOptions={screenOptions} initialRouteName='homestack'>
             {/* HomeScreen */}
             <Tab.Screen name="home" component={Home} options={{
                 tabBarIcon: ({ focused }) =>
-                    <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
+                    <View style={styles.iconContainer}>
                         <LinearGradient
                             colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
                             style={styles.gradient}
@@ -39,7 +38,7 @@ const HomeStack = () => {
             {/* Lost and Found Screen */}
             <Tab.Screen name="lostandfound" component={LostAndFound} options={{
                 tabBarIcon: ({ focused }) =>
-                    <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
+                    <View style={styles.iconContainer}>
                         <LinearGradient
                             colors={focused ? [Colors.BLUE, Colors.DBLUE] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
                             style={styles.gradient}
@@ -53,7 +52,7 @@ const HomeStack = () => {
             {/* News Screen */}
             <Tab.Screen name="news" component={News} options={{
                 tabBarIcon: ({ focused }) =>
-                    <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
+                    <View style={styles.iconContainer}>
                         <LinearGradient
                             colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
                             style={styles.gradient}
@@ -67,7 +66,7 @@ const HomeStack = () => {
             {/* Settings Screen */}
             {/* <Tab.Screen name="settings" component={Settings} options={{
                     tabBarIcon: ({ focused }) =>
-                        <View style={[styles.iconContainer, focused && styles.iconContainerFocused]}>
+                        <View style={styles.iconContainer}>
                             <LinearGradient
                                 colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
                                 style={styles.gradient}
@@ -83,15 +82,15 @@ const HomeStack = () => {
     );
 };
 
-export default function BottomNavigator() {
+export default function CustomNavigator() {
     return (
-        <NavigationContainer>
+        // <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="homestack" component={HomeStack} />
+                <Stack.Screen name="mainstack" component={MainStack} />
                 <Stack.Screen name="profile" component={Profile} />
                 <Stack.Screen name="newsextended" component={NewsExtended} />
             </Stack.Navigator>
-        </NavigationContainer>
+        // </NavigationContainer>
 
     )
 }
@@ -106,8 +105,7 @@ const screenOptions = {
         left: 10,
         elevation: 2,
         height: 80,
-        background: "#D9D9D9",
-        borderRadius: 50,
+        borderRadius: 40,
     }
 }
 const styles = StyleSheet.create({
