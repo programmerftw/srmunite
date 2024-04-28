@@ -34,7 +34,7 @@ export default function News() {
       {/* News Container */}
       <View style={styles.newsContainer}>
         {newsData.map(item => (
-          <NewsCard key={item._id} height={245} news={item.news} tag={item.tags} marginBottom={20} />
+          <NewsCard key={item._id} height={225} news={item.news} tag={item.tags} marginBottom={20} />
         ))}
       </View>
     </ScrollView>

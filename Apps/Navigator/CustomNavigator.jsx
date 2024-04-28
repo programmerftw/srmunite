@@ -64,19 +64,19 @@ const MainStack = () => {
                     </View>
             }} />
             {/* Settings Screen */}
-            {/* <Tab.Screen name="settings" component={Settings} options={{
-                    tabBarIcon: ({ focused }) =>
-                        <View style={styles.iconContainer}>
-                            <LinearGradient
-                                colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
-                                style={styles.gradient}
-                                start={[0, 0]}
-                                end={[1, 1.5]}
-                            >
-                                <Ionicons name="settings" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
-                            </LinearGradient>
-                        </View>
-                }} /> */}
+            <Tab.Screen name="settings" component={Settings} options={{
+                tabBarIcon: ({ focused }) =>
+                    <View style={styles.iconContainer}>
+                        <LinearGradient
+                            colors={focused ? ['#007DFF', '#004B99'] : [Colors.ACTIVE_TAB_COLOR, Colors.ACTIVE_TAB_COLOR]}
+                            style={styles.gradient}
+                            start={[0, 0]}
+                            end={[1, 1.5]}
+                        >
+                            <Ionicons name="settings" focused={focused} size={iconSize} color={focused ? Colors.ACTIVE_TAB_COLOR : Colors.INACTIVE_TAB_COLOR} />
+                        </LinearGradient>
+                    </View>
+            }} />
         </Tab.Navigator>
 
     );
@@ -84,13 +84,13 @@ const MainStack = () => {
 
 export default function CustomNavigator() {
     return (
-        // <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="mainstack" component={MainStack} />
-                <Stack.Screen name="profile" component={Profile} />
-                <Stack.Screen name="newsextended" component={NewsExtended} />
-            </Stack.Navigator>
-        // </NavigationContainer>
+        <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="mainstack" component={MainStack} />
+            <Stack.Screen name="profile" component={Profile} />
+            <Stack.Screen name="newsextended" component={NewsExtended} />
+        </Stack.Navigator>
+        </NavigationContainer>
 
     )
 }
@@ -106,9 +106,14 @@ const screenOptions = {
         elevation: 2,
         height: 80,
         borderRadius: 40,
+        backgroundColor: "#FAF9F6"
     }
 }
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'transparent',
+    },
     iconContainer: {
         width: iconContainerSize,
         height: iconContainerSize,
