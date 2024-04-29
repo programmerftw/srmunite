@@ -25,13 +25,13 @@ export default function Home() {
   const flatListRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://192.168.1.111:3000/api/news')
+    fetch('http://192.168.1.35:3000/api/news')
       .then(response => response.json())
       .then((data) => {
         // Handle the data received from the server
         // console.log(data); // or set state, etc.
         setNewsData(data)
-        console.log(NewsData)
+        
       })
       .catch(error => {
         console.error('Error fetching data:', error);

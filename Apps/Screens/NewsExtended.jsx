@@ -1,11 +1,30 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, useColorScheme } from 'react-native'
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import CustomFonts from '../Components/CustomFonts';
 import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 
 export default function NewsExtended({ tag, date, heading, news }) {
+    const [NewsData, setNewsData] = useState([])
+    const [activeIndex, setActiveIndex] = useState(0);
+    
+    useEffect(() => {
+        fetch('http://192.168.1.35:3000/api/news')
+          .then(response => response.json())
+          .then((data) => {
+            // Handle the data received from the server
+            console.log(data); // or set state, etc.
+            setNewsData(data)
+            // console.log(NewsData[0].news)
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+    
+        
+      }, [ NewsData.length]);
+    
 
     const colorScheme = useColorScheme();
     const themeHeadingStyle = colorScheme === 'light' ? styles.lightHeadingText : styles.darkHeadingText;
@@ -36,7 +55,7 @@ export default function NewsExtended({ tag, date, heading, news }) {
             <Image style={styles.image} source={require("../../assets/images/LostandFoundItems/LostItem1.jpg")}></Image>
             <View style={styles.newsContainer}>
                 {/* News Heading */}
-                <Text style={[themeHeadingStyle, styles.heading]}>IOC accuses Russia of 'politicisation of sport' with Friendship Games</Text>
+                <Text style={[themeHeadingStyle, styles.heading]}>Hello</Text>
                 <View style={styles.flexConatiner}>
                     {/* News tag */}
                     <Text style={styles.tag}>games</Text>
