@@ -29,7 +29,7 @@ export default function Home() {
   const flatListRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://192.168.1.35:3000/api/news')
+    fetch('http://192.168.1.36:3000/api/news')
       .then(response => response.json())
       .then((data) => {
         // Handle the data received from the server
@@ -96,7 +96,7 @@ export default function Home() {
           />
         </View>
         <View style={styles.footer}>
-          <Text style={[styles.footerText, themeTextStyle]}>Crafted with 🍆 in Sonipat, India</Text>
+          <Text style={[styles.footerText, themeTextStyle]}>Crafted with ❤️ in Sonipat, India</Text>
         </View>
       </View>
     </ScrollView>

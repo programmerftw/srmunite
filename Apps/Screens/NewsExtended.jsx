@@ -10,13 +10,13 @@ export default function NewsExtended({ tag, date, heading, news }) {
     const [activeIndex, setActiveIndex] = useState(0);
     
     useEffect(() => {
-        fetch('http://192.168.1.35:3000/api/news')
+        fetch('http://192.168.1.36:3000/api/news')
           .then(response => response.json())
           .then((data) => {
             // Handle the data received from the server
-            console.log(data); // or set state, etc.
+            // console.log(data); // or set state, etc.
             setNewsData(data)
-            // console.log(NewsData[0].news)
+            console.log(NewsData[0].news)
           })
           .catch(error => {
             console.error('Error fetching data:', error);
@@ -55,15 +55,15 @@ export default function NewsExtended({ tag, date, heading, news }) {
             <Image style={styles.image} source={require("../../assets/images/LostandFoundItems/LostItem1.jpg")}></Image>
             <View style={styles.newsContainer}>
                 {/* News Heading */}
-                <Text style={[themeHeadingStyle, styles.heading]}>Hello</Text>
+                <Text style={[themeHeadingStyle, styles.heading]}>{NewsData[0].news}</Text>
                 <View style={styles.flexConatiner}>
                     {/* News tag */}
-                    <Text style={styles.tag}>games</Text>
+                    <Text style={styles.tag}>{NewsData[0].tags}</Text>
                     {/* News Date */}
                     <Text style={[styles.date, themeTextStyle]}>Mar 20,2024</Text>
                 </View>
                 {/* Complete News */}
-                <Text style={[styles.news, themeTextStyle]}>The IOC, which has authorised the participation of Russian sportsmen and women in this year's Olympics in Paris only under a neutral banner and on condition that they did not support Russia's invasion of Ukraine, called on the sporting world and the governments invited by Moscow "to reject any participation in and support of" this event</Text>
+                <Text style={[styles.news, themeTextStyle]}>{NewsData[0].description}</Text>
             </View>
         </ScrollView>
     )
