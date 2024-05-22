@@ -8,12 +8,12 @@ import { useNavigation } from '@react-navigation/native';
 const screenWidth = Dimensions.get('window').width;
 const cardWidth = screenWidth * 0.95;
 
-export default function NewsCard({ height, news, tag, marginBottom }) {
+export default function NewsCard({ height, news, tag,id, marginBottom}) {
 
     const navigation = useNavigation();
 
     const handleProfilePress = () => {
-        navigation.navigate('newsextended'); // Navigate to newsextended screen
+        navigation.navigate('newsextended',{id:id}); // Navigate to newsextended screen
     };
     // Loading Fonts
     const fontloaded = CustomFonts();

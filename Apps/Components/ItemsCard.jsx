@@ -3,23 +3,28 @@ import React from 'react'
 import Colors from '../Utils/Colors'
 import CustomFonts from './CustomFonts'
 
-export default function ItemsCard({ path, location, date }) {
+export default function ItemsCard({data}) {
+  const date = new Date(data.date);
+
+// Extract the day, month, and year components
+const day = date.getDate().toString().padStart(2, '0'); // Ensure two digits
+const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based
+const year = date.getFullYear();
+
+// Construct the formatted date string
+const formattedDate = `${day}/${month}/${year}`;
 
   const colorScheme = useColorScheme();
   const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
-
-  const fontloaded = CustomFonts()
-
-  if (!fontloaded) {
-    return null;
-  }
 
   return (
     <View style={styles.body}>
       <View style={styles.container}>
         <Image source={require('../../assets/images/LostandFoundItems/LostItem1.jpg')} style={styles.image} />
-        <Text style={[styles.text, themeTextStyle]}>DATE : 18/04/24</Text>
-        <Text style={[styles.text, themeTextStyle]} numberOfLines={null}>LOCATION : 5TH FLOOR, LAB-4</Text>
+        <Text style={[styles.text, themeTextStyle]}>ITEM : {data.item}</Text>
+        <Text style={[styles.text, themeTextStyle]}>DATE : {formattedDate}</Text>
+        <Text style={[styles.text, themeTextStyle]} numberOfLines={null}>LOCATION: {data.location}</Text>
+        <Text style={[styles.text, themeTextStyle]}>CONTACT : {data.contact}</Text>
       </View>
     </View>
   )
