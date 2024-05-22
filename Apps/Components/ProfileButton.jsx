@@ -4,8 +4,7 @@ import Colors from '../Utils/Colors'
 import CustomFonts from './CustomFonts'
 import { useNavigation } from '@react-navigation/native';
 
-export default function ProfileButton({ initials }) {
-
+export default function ProfileButton({ data }) {
     const colorScheme = useColorScheme();
     const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
     const themeContainerStyle =
@@ -25,7 +24,7 @@ export default function ProfileButton({ initials }) {
     return (
         <TouchableOpacity style={[themeContainerStyle, styles.container]} onPress={handleProfilePress}>
             {/* <Text style={styles.text}>{initials}</Text> */}
-            <Text style={[styles.text,themeTextStyle]}>R</Text>
+            <Text style={[styles.text,themeTextStyle]}>{data[0]}</Text>
         </TouchableOpacity>
     )
 }

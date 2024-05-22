@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Dimensions, KeyboardAvoidingView, ScrollView, useColorScheme } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import LoginGradient from '../Components/LoginGradient'
 import Colors from '../Utils/Colors'
 import Buttons from '../Components/Buttons'
 import { MaterialIcons } from '@expo/vector-icons';
 import CustomFonts from '../Components/CustomFonts'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get('window');
 
@@ -33,6 +34,20 @@ export default function Login() {
     const handlePasswordChange = (text) => {
         setPassword(text);
     };
+    const saveUsername = async (username) => {
+        try {
+            await AsyncStorage.setItem('username', username);
+        } catch (error) {
+            console.error('Error saving username:', error);
+        }
+    };
+    const saveToken = async (token) => {
+        try {
+            await AsyncStorage.setItem('jwtToken', token);
+        } catch (error) {
+            console.error('Error saving token:', error);
+        }
+    };
 
     const handleSubmit = () => {
         // Handle form submission here
@@ -52,7 +67,11 @@ export default function Login() {
             .then(response => response.json())
             .then((data) => {
                 console.log(data)
-                navigation.navigate('customnav');
+                if(data.status == true){
+                    navigation.navigate('customnav');
+                    saveUsername(email);
+                    saveToken(data.token);
+                }
             })
             .catch(error => console.error('Error:', error)); // Add error handling
     };
@@ -67,12 +86,24 @@ export default function Login() {
         clearFields();
     };
 
-    // Loading Fonts
-    const fontloaded = CustomFonts()
+    useEffect(() => {
+        // Check if the user is logged in
+        const checkLoginStatus = async () => {
+          try {
+            const token = await AsyncStorage.getItem('jwtToken');
+            // If token exists, verify it with the server (if needed)
+            // For simplicity, assume token is valid here
+            if (token) {
+              navigation.navigate('customnav');
+            }
+          } catch (error) {
+            console.error('Error checking login status:', error);
+          }
+        };
+    
+        checkLoginStatus();
+      }, []);
 
-    if (!fontloaded) {
-        return null;
-    }
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
             <ScrollView style={[themeContainerStyle]} contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps='handled'>
@@ -166,5 +197,5 @@ const styles = StyleSheet.create({
         marginBottom: 25,
         alignItems: 'center'
     }
-}
-)
+});
+

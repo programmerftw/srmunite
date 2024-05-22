@@ -22,18 +22,17 @@ export default function Home() {
   // rendering newscard
   const renderItem = ({ item, index }) => (
     <View>
-      <NewsCard height={200} news={item.news} tag={item.tags} />
+      <NewsCard height={200} news={item.news} tag={item.tags} id={item._id}/>
     </View>
   );
 
   const flatListRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://192.168.1.36:3000/api/news')
+    fetch('http://192.168.29.239:3000/api/news')
       .then(response => response.json())
       .then((data) => {
         // Handle the data received from the server
-        // console.log(data); // or set state, etc.
         setNewsData(data)
         
       })

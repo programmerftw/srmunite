@@ -84,13 +84,13 @@ const MainStack = () => {
 
 export default function CustomNavigator() {
     return (
-        <NavigationContainer>
+        // <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="mainstack" component={MainStack} />
             <Stack.Screen name="profile" component={Profile} />
             <Stack.Screen name="newsextended" component={NewsExtended} />
         </Stack.Navigator>
-        </NavigationContainer>
+        // </NavigationContainer>
 
     )
 }

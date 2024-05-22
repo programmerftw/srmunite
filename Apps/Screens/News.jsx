@@ -14,11 +14,11 @@ export default function News() {
   useEffect(() => {
     // Function to fetch data
 
-    fetch('http://192.168.1.35:3000/api/news')
+    fetch('http://192.168.29.239:3000/api/news')
       .then(response => response.json())
       .then(data => {
         // Handle the data received from the server
-        
+        console.log(data);
         setNewsData(data)
       })
       .catch(error => {
@@ -34,7 +34,7 @@ export default function News() {
       {/* News Container */}
       <View style={styles.newsContainer}>
         {newsData.map(item => (
-          <NewsCard key={item._id} height={225} news={item.news} tag={item.tags} marginBottom={20} />
+          <NewsCard key={item._id} height={225} news={item.news} tag={item.tags} id={item._id} marginBottom={20} />
         ))}
       </View>
     </ScrollView>

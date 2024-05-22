@@ -9,10 +9,10 @@ import NewsExtended from './Apps/Screens/NewsExtended'
 export default function App() {
   return (
     // Login and Signup
-    // <StackNavigator />
+    <StackNavigator />
 
     // Other Screens (Home, News, etc)
-    <CustomNavigator />
+    // <CustomNavigator />
     // <Profile/>
     // <NewsExtended/>
   );
