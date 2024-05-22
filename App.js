@@ -1,10 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
-import OTP from './Apps/Screens/OTP';
-import { StatusBar } from 'expo-status-bar';
 import StackNavigator from './Apps/Navigator/StackNavigator';
 import CustomNavigator from './Apps/Navigator/CustomNavigator';
-import Profile from './Apps/Screens/Profile'
-import NewsExtended from './Apps/Screens/NewsExtended'
 
 export default function App() {
   return (
@@ -13,8 +9,6 @@ export default function App() {
 
     // Other Screens (Home, News, etc)
     // <CustomNavigator />
-    // <Profile/>
-    // <NewsExtended/>
   );
 }
 

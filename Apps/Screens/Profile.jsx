@@ -17,11 +17,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const baseUrl = "https://two-factor-auth-5geo.onrender.com";
 
-export default function Profile({ name, email }) {
+export default function Profile() {
   const [jwtToken, setJwtToken] = useState("");
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
   const getToken = async () => {
     try {
       const jwtToken = await AsyncStorage.getItem("jwtToken");
@@ -42,18 +43,13 @@ export default function Profile({ name, email }) {
   const navigation = useNavigation();
   const fontloaded = CustomFonts();
 
-  // const [darkModeEnabled, setDarkModeEnabled] = useState(false);
-  // const toggleDarkMode = () => {
-  //     setDarkModeEnabled(!darkModeEnabled);
-  // };
-
   useEffect(() => {
     let isMounted = true;
     getToken().then((jwtToken) => {
       if (jwtToken) {
         setJwtToken(jwtToken);
         fetch(`${baseUrl}/api/user/getUser/`, {
-          method: "GET", // Use 'GET' for fetching data
+          method: "GET",
           headers: {
             Authorization: `Bearer ${jwtToken}`,
             "Content-Type": "application/json",
@@ -95,13 +91,17 @@ export default function Profile({ name, email }) {
     return null;
   }
 
-  if (loading) {
-    return <ActivityIndicator />;
+  if (loading || error ) {
+    return (
+      <View style={[styles.loadingContainer,themeContainerStyle]}>
+        <ActivityIndicator size="large" color={Colors.BLUE} />
+      </View>
+    );
   }
 
-  if (error) {
-    return <Text>Error fetching data</Text>;
-  }
+  // if (error) {
+  //   return <Text>Error fetching data</Text>;
+  // }
 
   const goBack = () => {
     navigation.goBack();
@@ -109,11 +109,11 @@ export default function Profile({ name, email }) {
 
   const clearToken = async () => {
     try {
-        await AsyncStorage.removeItem('jwtToken');
+      await AsyncStorage.removeItem("jwtToken");
     } catch (error) {
-        console.error('Error clearing token:', error);
+      console.error("Error clearing token:", error);
     }
-};
+  };
 
   return (
     <View style={[themeContainerStyle]}>
@@ -124,23 +124,17 @@ export default function Profile({ name, email }) {
       {/* Profile Photo */}
       <ProfilePhoto />
       {/* Name */}
-      <Text style={[styles.name, themeTextStyle]}>{userData.data.username}</Text>
+      <Text style={[styles.name, themeTextStyle]}>
+        {userData.data.username}
+      </Text>
       {/* Email */}
       <Text style={styles.email}>{userData.data.email}</Text>
       {/* Horizontal Lines */}
       <View style={styles.lineContainer}>
         <View style={styles.line}></View>
       </View>
-      {/* To Change password */}
-      <TouchableOpacity activeOpacity={0.4}>
-        <Text style={[styles.text, themeTextStyle]}>Change Password</Text>
-      </TouchableOpacity>
-      {/* Horizontal Lines */}
-      <View style={styles.lineContainer}>
-        <View style={styles.line}></View>
-      </View>
       <View style={styles.darkModeContainer}>
-        {/* To enable darkmode */}
+        {/* To enable dark mode */}
         <Text style={[styles.text, themeTextStyle]}>Dark Mode</Text>
         <TouchableOpacity>
           <FontAwesome
@@ -155,13 +149,13 @@ export default function Profile({ name, email }) {
       <View style={styles.lineContainer}>
         <View style={styles.line}></View>
       </View>
-      {/*  Logout Button*/}
+      {/* Logout Button */}
       <View style={styles.button}>
         <Buttons
           onPress={() => {
             console.log("logout");
             clearToken();
-            navigation.navigate('login');
+            navigation.navigate("login");
           }}
           text={"Log out"}
         />
@@ -226,6 +220,11 @@ const styles = StyleSheet.create({
     bottom: 20, // Adjust this value as needed to fit your layout
     left: 0,
     right: 0,
+    alignItems: "center",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
   },
 });

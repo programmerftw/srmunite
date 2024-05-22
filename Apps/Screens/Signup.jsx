@@ -76,7 +76,6 @@ export default function Signup({ navigation }) {
 
     // Loading Fonts
     const fontloaded = CustomFonts()
-
     if (!fontloaded) {
         return null;
     }
