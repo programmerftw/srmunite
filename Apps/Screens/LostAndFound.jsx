@@ -5,12 +5,14 @@ import {
   ActivityIndicator,
   FlatList,
   Text,
+  ScrollView
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Header from "../Components/Header";
 import ItemsCard from "../Components/ItemsCard";
 import Colors from "../Utils/Colors";
 import CustomFonts from "../Components/CustomFonts";
+import ItemCardSkeleton from "../Components/ItemCardSkeleton";
 
 export default function LostAndFound() {
   const [lostAndFoundData, setLostAndFoundData] = useState([]);
@@ -43,21 +45,23 @@ export default function LostAndFound() {
     };
   }, []);
 
-  if (loading) {
+  if (loading || error) {
     return (
-      <View style={[styles.loadingContainer, themeContainerStyle]}>
-        <ActivityIndicator size="large" color={Colors.BLUE} />
-      </View>
+      <ScrollView style={[themeContainerStyle]}>
+        <Header
+          headText={"News"}
+          fontFamily={"Poppins-SemiBold"}
+          fontSize={26}
+        />
+        <View style={styles.itemContainer}>
+          {[...Array(3)].map((_, index) => (
+            <ItemCardSkeleton key={index} height={225} marginBottom={20} />
+          ))}
+        </View>
+      </ScrollView>
     );
   }
 
-  if (error) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={[themeContainerStyle,themeTextStyle]}>Error fetching data</Text>
-      </View>
-    );
-  }
 
   if (!fontloaded) {
     return null;

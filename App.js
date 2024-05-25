@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
 import StackNavigator from './Apps/Navigator/StackNavigator';
 import CustomNavigator from './Apps/Navigator/CustomNavigator';
 
@@ -12,11 +11,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fffff'
-  },
-});

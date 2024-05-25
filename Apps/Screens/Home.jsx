@@ -13,6 +13,7 @@ import Header from "../Components/Header";
 import Colors from "../Utils/Colors";
 import { WebView } from "react-native-webview";
 import CustomFonts from "../Components/CustomFonts";
+import NewsCardSkeleton from "../Components/NewsCardSkeleton";
 
 const screenWidth = Dimensions.get("window").width;
 const postHeight = 750;
@@ -27,24 +28,37 @@ export default function Home() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [NewsData, setNewsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   // rendering newscard
-  const renderItem = ({ item, index }) => (
-    <View>
-      <NewsCard height={200} news={item.news} tag={item.tags} id={item._id} />
-    </View>
-  );
+  // const renderItem = ({ item, index }) => (
+  //   <View>
+  //     {loading || error ? (
+  //       <NewsCardSkeleton height={200} />
+  //     ) : (
+  //       <NewsCard height={200} news={item.news} tag={item.tags} id={item._id} />
+  //     )}
+  //   </View>
+  // );
 
   const flatListRef = useRef(null);
 
   useEffect(() => {
+    let isMounted = true;
     fetch("http://192.168.1.111:3000/api/news")
       .then((response) => response.json())
       .then((data) => {
         // Handle the data received from the server
-        setNewsData(data);
+        if (isMounted) {
+          setNewsData(data);
+          setLoading(false);
+        }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setError(error);
+        setLoading(false);
       });
 
     const interval = setInterval(() => {
@@ -56,12 +70,26 @@ export default function Home() {
         });
       }
     }, 4000);
-    return () => clearInterval(interval);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, [activeIndex, NewsData.length]);
 
   if (!fontloaded) {
     return null;
   }
+
+  // rendering newscard
+  const renderItem = ({ item, index }) => (
+    <View>
+      {loading || error ? (
+        <NewsCardSkeleton height={200} />
+      ) : (
+        <NewsCard height={200} news={item.news} tag={item.tags} id={item._id} />
+      )}
+    </View>
+  );
 
   return (
     <ScrollView style={[themeContainerStyle]}>
@@ -73,9 +101,11 @@ export default function Home() {
         {/* Moving card */}
         <FlatList
           ref={flatListRef}
-          data={NewsData}
+          data={loading || error ? Array.from({ length: 3 }) : NewsData}
           renderItem={renderItem}
-          keyExtractor={(item) => item._id}
+          keyExtractor={(item, index) =>
+            loading || error ? index.toString() : item._id
+          }
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
@@ -88,12 +118,14 @@ export default function Home() {
         />
         {/* Pagination */}
         <View style={styles.pagination}>
-          {NewsData.map((_item, index) => (
-            <View
-              key={index}
-              style={[styles.dot, index === activeIndex && styles.activeDot]}
-            />
-          ))}
+          {(loading || error ? Array.from({ length: 3 }) : NewsData).map(
+            (_item, index) => (
+              <View
+                key={index}
+                style={[styles.dot, index === activeIndex && styles.activeDot]}
+              />
+            )
+          )}
         </View>
         {/* I-Frame */}
         <Text style={[styles.postText, themeTextStyle]}>Post</Text>

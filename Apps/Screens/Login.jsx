@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   useColorScheme,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import LoginGradient from "../Components/LoginGradient";
@@ -28,6 +29,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
   const colorScheme = useColorScheme();
   const themeContainerStyle =
     colorScheme === "light" ? styles.lightContainer : styles.darkContainer;
@@ -76,6 +78,7 @@ export default function Login() {
   };
 
   const handleSubmit = () => {
+    setLoading(true); // Set loading to true when submitting
     fetch(base_url + "/api/user/login", {
       method: "POST",
       headers: {
@@ -88,13 +91,17 @@ export default function Login() {
     })
       .then((response) => response.json())
       .then((data) => {
+        setLoading(false); // Set loading to false after response is received
         if (data.status === true) {
           navigation.navigate("customnav");
           saveUsername(email);
           saveToken(data.token);
         }
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {
+        setLoading(false); // Set loading to false if there's an error
+        console.error("Error:", error);
+      });
   };
 
   const clearFields = () => {
@@ -157,7 +164,11 @@ export default function Login() {
           <Text style={styles.text}>Forget password?</Text>
         </TouchableOpacity>
         <View style={styles.passbutton}>
-          <Buttons text={"Log in"} onPress={handleSubmit}></Buttons>
+          {loading ? (
+            <ActivityIndicator size="large" color={Colors.BLUE} />
+          ) : (
+            <Buttons text={"Log in"} onPress={handleSubmit}></Buttons>
+          )}
         </View>
         <TouchableOpacity onPress={gotoSignup}>
           <Text style={styles.text}>Sign up</Text>
