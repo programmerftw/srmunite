@@ -26,7 +26,8 @@ export default function ItemsCard({ data }) {
     <View style={styles.body}>
       <View style={styles.container}>
         <Image
-          source={require("../../assets/images/LostandFoundItems/LostItem1.jpg")}
+        resizeMode="contain"
+          source={{uri:data.image}}
           style={styles.image}
         />
         <Text style={[styles.text, themeTextStyle]}>ITEM : {data.item}</Text>
@@ -59,8 +60,8 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255, 255, 255, 0.4)",
   },
   image: {
-    width: "100%",
-    height: 220,
+    width: 320,
+    height: 320,
     borderRadius: 13,
     resizeMode: "stretch",
     marginBottom: 18,

@@ -27,10 +27,11 @@ export default function LostAndFound() {
 
   useEffect(() => {
     let isMounted = true;
-    fetch(`http://192.168.1.111:3000/api/lostandfound`)
+    fetch(`http://192.168.29.239:3000/api/lostandfound`)
       .then((response) => response.json())
       .then((data) => {
         if (isMounted) {
+          console.log(data);
           setLostAndFoundData(data);
           setLoading(false);
         }

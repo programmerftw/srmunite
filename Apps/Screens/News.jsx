@@ -18,7 +18,7 @@ export default function News() {
   useEffect(() => {
     // Function to fetch data
     let isMounted = true;
-    fetch("http://192.168.1.111:3000/api/news")
+    fetch("http://192.168.29.239:3000/api/news")
       .then((response) => response.json())
       .then((data) => {
         // Handle the data received from the server

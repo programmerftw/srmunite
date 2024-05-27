@@ -41,7 +41,7 @@ export default function NewsExtended() {
   useEffect(() => {
     let isMounted = true;
     console.log(id);
-    fetch(`http://192.168.1.111:3000/api/news/${id}`)
+    fetch(`http://192.168.29.239:3000/api/news/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (isMounted) {
@@ -90,7 +90,7 @@ export default function NewsExtended() {
       {/* News Image */}
       <Image
         style={styles.image}
-        source={require("../../assets/images/LostandFoundItems/LostItem1.jpg")}
+        source={{uri: NewsData.image}}
       />
       <View style={styles.newsContainer}>
         {/* News Heading */}
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 250,
-    resizeMode: "stretch",
+    resizeMode: "contain",
     borderRadius: 8,
     marginBottom: 30,
   },
